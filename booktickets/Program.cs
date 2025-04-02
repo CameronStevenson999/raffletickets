@@ -3,17 +3,14 @@ using booktickets.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-//builder.Services.AddControllersWithViews();
-
-// Add services to the container.
-
+builder.Services.AddDbContext<LotteryDbContext>(options => options.UseInMemoryDatabase("LotteryDb"));
+builder.Services.AddScoped<ILotteryPurchaseService, LotteryPurchaseService>();
 builder.Services.AddControllers();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddOpenApiDocument();
-builder.Services.AddDbContext<TicketContext>(opt =>
-    opt.UseInMemoryDatabase("TicketSalesList"));
+
 
 var app = builder.Build();
 
